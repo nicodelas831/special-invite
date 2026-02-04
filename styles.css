@@ -1,17 +1,17 @@
 body {
   margin: 0;
+  padding: 0;
   height: 100vh;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #ffdde1, #ee9ca7);
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: Arial, sans-serif;
-  background: linear-gradient(135deg, #ffdde1, #ee9ca7);
   overflow: hidden;
 }
 
 .container {
   text-align: center;
-  position: relative;
 }
 
 h1 {
@@ -20,27 +20,30 @@ h1 {
 
 .buttons {
   position: relative;
-  height: 80px;
+  width: 300px;
+  height: 100px;
 }
 
 .btn {
-  padding: 14px 28px;
+  padding: 14px 24px;
   font-size: 18px;
   border: none;
   border-radius: 8px;
   cursor: pointer;
   position: absolute;
-  transition: transform 0.25s ease, left 0.25s ease, top 0.25s ease;
+  transition: left 0.25s ease, top 0.25s ease;
 }
 
 .yes {
   background: #28a745;
   color: white;
   left: 0;
+  top: 30px;
 }
 
 .no {
   background: #dc3545;
   color: white;
   left: 120px;
+  top: 30px;
 }
