@@ -45,4 +45,3 @@ yesBtn.addEventListener("click", () => {
     </div>
   `;
 });
- 
