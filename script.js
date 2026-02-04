@@ -19,13 +19,25 @@ setInterval(createHeart, 400);
 const noBtn = document.getElementById("noBtn");
 const yesBtn = document.getElementById("yesBtn");
 
-noBtn.addEventListener("mouseover", () => {
-  const x = Math.random() * (window.innerWidth - noBtn.clientWidth);
-  const y = Math.random() * (window.innerHeight - noBtn.clientHeight);
+document.addEventListener("mousemove", (e) => {
+  const rect = noBtn.getBoundingClientRect();
 
-  noBtn.style.position = "absolute";
-  noBtn.style.left = `${x}px`;
-  noBtn.style.top = `${y}px`;
+  const distanceX = e.clientX - (rect.left + rect.width / 2);
+  const distanceY = e.clientY - (rect.top + rect.height / 2);
+
+  const distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
+
+  if (distance < 120) {
+    let newX = rect.left - distanceX * 0.8;
+    let newY = rect.top - distanceY * 0.8;
+
+    // Keep inside screen
+    newX = Math.max(0, Math.min(window.innerWidth - rect.width, newX));
+    newY = Math.max(0, Math.min(window.innerHeight - rect.height, newY));
+
+    noBtn.style.left = newX + "px";
+    noBtn.style.top = newY + "px";
+  }
 });
 
 yesBtn.addEventListener("click", () => {
