@@ -3,76 +3,80 @@ body, html {
   padding: 0;
   font-family: Arial, sans-serif;
   height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  overflow: hidden;
   background: linear-gradient(135deg, #ffdde1, #ee9ca7);
 }
 
-.container {
-  text-align: center;
-}
-
-.btn-group {
-  margin-top: 30px;
-  display: flex;
-  gap: 20px;
-  justify-content: center;
-}
-
-.btn {
-  padding: 15px 30px;
-  font-size: 20px;
-  cursor: pointer;
-  border: none;
-  border-radius: 8px;
-  transition: transform 0.2s ease;
-}
-
-.yes {
-  background-color: #28a745;
-  color: white;
-}
-
-.no {
-  background-color: #dc3545;
-  color: white;
-  position: absolute;
-  transition: left 0.4s ease, top 0.4s ease;
-}
-
-/* Floating Hearts */
+/* Hearts background */
 .hearts {
   position: fixed;
-  top: 0;
-  left: 0;
   width: 100%;
   height: 100%;
+  top: 0;
+  left: 0;
   overflow: hidden;
   z-index: 0;
 }
 
 .heart {
   position: absolute;
-  bottom: -20px;
+  bottom: -30px;
   font-size: 20px;
-  animation: floatUp 6s linear infinite;
-  opacity: 0.7;
+  animation: floatUp linear forwards;
 }
 
 @keyframes floatUp {
-  0% {
-    transform: translateY(0) scale(1);
-    opacity: 0.7;
-  }
-  100% {
-    transform: translateY(-110vh) scale(1.5);
+  to {
+    transform: translateY(-120vh);
     opacity: 0;
   }
 }
 
-/* Make content above hearts */
+/* Content */
 .container {
   position: relative;
-  z-index: 1;
+  z-index: 2;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+h1 {
+  font-size: 2.2rem;
+}
+
+.btn-group {
+  margin-top: 30px;
+  position: relative;
+  width: 300px;
+  height: 150px;
+}
+
+/* Buttons */
+.btn {
+  padding: 15px 30px;
+  font-size: 20px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.yes {
+  background: #28a745;
+  color: white;
+  position: absolute;
+  left: 30px;
+  top: 50px;
+}
+
+.no {
+  background: #dc3545;
+  color: white;
+  position: absolute;
+  left: 160px;
+  top: 50px;
+  transition: left 0.35s ease, top 0.35s ease;
 }
