@@ -1,46 +1,45 @@
 const noBtn = document.getElementById("noBtn");
 const yesBtn = document.getElementById("yesBtn");
-const heartsContainer = document.querySelector(".hearts");
 
-/* YES BUTTON */
-yesBtn.addEventListener("click", () => {
-  document.body.innerHTML =
-    "<h1 style='text-align:center;margin-top:20%;font-size:40px;color:#333;'>YAY!! 💖 Can't wait to be your Valentine!</h1>";
-});
+let btnX = 120;
+let btnY = 0;
 
-/* NO BUTTON — smooth swim away */
 document.addEventListener("mousemove", (e) => {
   const rect = noBtn.getBoundingClientRect();
-  const dx = e.clientX - (rect.left + rect.width / 2);
-  const dy = e.clientY - (rect.top + rect.height / 2);
-  const distance = Math.sqrt(dx * dx + dy * dy);
 
-  if (distance < 120) {
-    let moveX = rect.left - dx * 0.5;
-    let moveY = rect.top - dy * 0.5;
+  const btnCenterX = rect.left + rect.width / 2;
+  const btnCenterY = rect.top + rect.height / 2;
 
-    // keep inside screen
-    moveX = Math.max(0, Math.min(window.innerWidth - rect.width, moveX));
-    moveY = Math.max(0, Math.min(window.innerHeight - rect.height, moveY));
+  const distX = e.clientX - btnCenterX;
+  const distY = e.clientY - btnCenterY;
 
-    noBtn.style.left = moveX + "px";
-    noBtn.style.top = moveY + "px";
+  const distance = Math.sqrt(distX * distX + distY * distY);
+
+  const triggerDistance = 120; // how close cursor gets before button escapes
+
+  if (distance < triggerDistance) {
+    const moveStrength = 80;
+
+    // Move opposite direction of cursor
+    btnX -= (distX / distance) * moveStrength;
+    btnY -= (distY / distance) * moveStrength;
+
+    // Keep inside screen bounds
+    const maxX = window.innerWidth - rect.width - 20;
+    const maxY = window.innerHeight - rect.height - 20;
+
+    btnX = Math.max(0, Math.min(btnX, maxX));
+    btnY = Math.max(0, Math.min(btnY, maxY));
+
+    noBtn.style.left = btnX + "px";
+    noBtn.style.top = btnY + "px";
   }
 });
 
-/* FLOATING HEARTS */
-function createHeart() {
-  const heart = document.createElement("div");
-  heart.classList.add("heart");
-  heart.innerText = "💗";
-
-  heart.style.left = Math.random() * 100 + "vw";
-  heart.style.fontSize = Math.random() * 20 + 15 + "px";
-  heart.style.animationDuration = Math.random() * 3 + 4 + "s";
-
-  heartsContainer.appendChild(heart);
-
-  setTimeout(() => heart.remove(), 7000);
-}
-
-setInterval(createHeart, 300);
+yesBtn.addEventListener("click", () => {
+  document.body.innerHTML = `
+    <div style="display:flex;justify-content:center;align-items:center;height:100vh;font-size:40px;text-align:center;">
+      YAY!!! 💖 Can't wait for our date 😍
+    </div>
+  `;
+});
