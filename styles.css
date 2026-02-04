@@ -1,0 +1,41 @@
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #ffdde1, #ee9ca7);
+}
+
+.container {
+  text-align: center;
+}
+
+.btn-group {
+  margin-top: 30px;
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+}
+
+.btn {
+  padding: 15px 30px;
+  font-size: 20px;
+  cursor: pointer;
+  border: none;
+  border-radius: 8px;
+  transition: transform 0.2s ease;
+}
+
+.yes {
+  background-color: #28a745;
+  color: white;
+}
+
+.no {
+  background-color: #dc3545;
+  color: white;
+  position: relative;
+}
