@@ -19,7 +19,7 @@ document.addEventListener("mousemove", (e) => {
   const triggerDistance = 100;
 
   if (distance < triggerDistance) {
-    const moveAmount = 100;
+    const moveAmount = 80;
 
     posX -= (distX / distance) * moveAmount;
     posY -= (distY / distance) * moveAmount;
