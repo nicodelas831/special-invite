@@ -1,17 +1,20 @@
 const noBtn = document.getElementById("noBtn");
 const yesBtn = document.getElementById("yesBtn");
+const buttonsContainer = document.querySelector(".buttons");
 
-// Store current position
+// Start position relative to container
 let posX = 120;
 let posY = 30;
 
 document.addEventListener("mousemove", (e) => {
-  const rect = noBtn.getBoundingClientRect();
+  const containerRect = buttonsContainer.getBoundingClientRect();
+  const btnRect = noBtn.getBoundingClientRect();
 
-  const btnCenterX = rect.left + rect.width / 2;
-  const btnCenterY = rect.top + rect.height / 2;
+  // Calculate button center relative to viewport
+  const btnCenterX = btnRect.left + btnRect.width / 2;
+  const btnCenterY = btnRect.top + btnRect.height / 2;
 
-  // distance from cursor to button center
+  // Distance from cursor to button center
   const distX = e.clientX - btnCenterX;
   const distY = e.clientY - btnCenterY;
   const distance = Math.sqrt(distX * distX + distY * distY);
@@ -21,15 +24,17 @@ document.addEventListener("mousemove", (e) => {
   if (distance < triggerDistance) {
     const moveAmount = 80;
 
+    // Move button position opposite cursor direction
     posX -= (distX / distance) * moveAmount;
     posY -= (distY / distance) * moveAmount;
 
-    // constraints so button stays fully visible
+    // Calculate limits relative to container size (noBtn left/top are relative to container)
     const minX = 0;
     const minY = 0;
-    const maxX = window.innerWidth - rect.width - 10;
-    const maxY = window.innerHeight - rect.height - 10;
+    const maxX = containerRect.width - btnRect.width;
+    const maxY = containerRect.height - btnRect.height;
 
+    // Clamp position inside container boundaries
     posX = Math.max(minX, Math.min(posX, maxX));
     posY = Math.max(minY, Math.min(posY, maxY));
 
