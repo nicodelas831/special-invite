@@ -1,49 +1,46 @@
 const noBtn = document.getElementById("noBtn");
 const yesBtn = document.getElementById("yesBtn");
+const heartsContainer = document.querySelector(".hearts");
 
-/* 💖 Floating Hearts */
-function createHeart() {
-  const heart = document.createElement("div");
-  heart.className = "heart";
-  heart.innerHTML = "💖";
+/* YES BUTTON */
+yesBtn.addEventListener("click", () => {
+  document.body.innerHTML =
+    "<h1 style='text-align:center;margin-top:20%;font-size:40px;color:#333;'>YAY!! 💖 Can't wait to be your Valentine!</h1>";
+});
 
-  heart.style.left = Math.random() * 100 + "vw";
-  heart.style.fontSize = 15 + Math.random() * 25 + "px";
-  heart.style.animationDuration = 4 + Math.random() * 4 + "s";
-
-  document.querySelector(".hearts").appendChild(heart);
-
-  setTimeout(() => heart.remove(), 8000);
-}
-
-setInterval(createHeart, 400);
-
-/* 🏊 No Button Swimming Away */
+/* NO BUTTON — smooth swim away */
 document.addEventListener("mousemove", (e) => {
   const rect = noBtn.getBoundingClientRect();
-
   const dx = e.clientX - (rect.left + rect.width / 2);
   const dy = e.clientY - (rect.top + rect.height / 2);
-
   const distance = Math.sqrt(dx * dx + dy * dy);
 
   if (distance < 120) {
-    let newX = rect.left - dx * 0.6;
-    let newY = rect.top - dy * 0.6;
+    let moveX = rect.left - dx * 0.5;
+    let moveY = rect.top - dy * 0.5;
 
-    newX = Math.max(0, Math.min(window.innerWidth - rect.width, newX));
-    newY = Math.max(0, Math.min(window.innerHeight - rect.height, newY));
+    // keep inside screen
+    moveX = Math.max(0, Math.min(window.innerWidth - rect.width, moveX));
+    moveY = Math.max(0, Math.min(window.innerHeight - rect.height, moveY));
 
-    noBtn.style.left = newX + "px";
-    noBtn.style.top = newY + "px";
+    noBtn.style.left = moveX + "px";
+    noBtn.style.top = moveY + "px";
   }
 });
 
-/* 💚 Yes Button Action */
-yesBtn.addEventListener("click", () => {
-  document.body.innerHTML = `
-    <h1 style="text-align:center;margin-top:20%;font-size:40px;">
-      YAYYY 💖 Can't wait!!
-    </h1>
-  `;
-});
+/* FLOATING HEARTS */
+function createHeart() {
+  const heart = document.createElement("div");
+  heart.classList.add("heart");
+  heart.innerText = "💗";
+
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.fontSize = Math.random() * 20 + 15 + "px";
+  heart.style.animationDuration = Math.random() * 3 + 4 + "s";
+
+  heartsContainer.appendChild(heart);
+
+  setTimeout(() => heart.remove(), 7000);
+}
+
+setInterval(createHeart, 300);
