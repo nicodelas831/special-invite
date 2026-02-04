@@ -1,8 +1,9 @@
 const noBtn = document.getElementById("noBtn");
 const yesBtn = document.getElementById("yesBtn");
 
-let btnX = 120;
-let btnY = 0;
+// Store current position
+let posX = 120;
+let posY = 30;
 
 document.addEventListener("mousemove", (e) => {
   const rect = noBtn.getBoundingClientRect();
@@ -10,29 +11,30 @@ document.addEventListener("mousemove", (e) => {
   const btnCenterX = rect.left + rect.width / 2;
   const btnCenterY = rect.top + rect.height / 2;
 
+  // distance from cursor to button center
   const distX = e.clientX - btnCenterX;
   const distY = e.clientY - btnCenterY;
-
   const distance = Math.sqrt(distX * distX + distY * distY);
 
-  const triggerDistance = 120; // how close cursor gets before button escapes
+  const triggerDistance = 100;
 
   if (distance < triggerDistance) {
-    const moveStrength = 80;
+    const moveAmount = 80;
 
-    // Move opposite direction of cursor
-    btnX -= (distX / distance) * moveStrength;
-    btnY -= (distY / distance) * moveStrength;
+    posX -= (distX / distance) * moveAmount;
+    posY -= (distY / distance) * moveAmount;
 
-    // Keep inside screen bounds
-    const maxX = window.innerWidth - rect.width - 20;
-    const maxY = window.innerHeight - rect.height - 20;
+    // constraints so button stays fully visible
+    const minX = 0;
+    const minY = 0;
+    const maxX = window.innerWidth - rect.width - 10;
+    const maxY = window.innerHeight - rect.height - 10;
 
-    btnX = Math.max(0, Math.min(btnX, maxX));
-    btnY = Math.max(0, Math.min(btnY, maxY));
+    posX = Math.max(minX, Math.min(posX, maxX));
+    posY = Math.max(minY, Math.min(posY, maxY));
 
-    noBtn.style.left = btnX + "px";
-    noBtn.style.top = btnY + "px";
+    noBtn.style.left = posX + "px";
+    noBtn.style.top = posY + "px";
   }
 });
 
