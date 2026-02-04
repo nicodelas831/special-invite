@@ -1,82 +1,46 @@
-body, html {
+body {
   margin: 0;
-  padding: 0;
-  font-family: Arial, sans-serif;
-  height: 100%;
-  overflow: hidden;
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(135deg, #ffd6e0, #ff9bb3);
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #ffdde1, #ee9ca7);
+  overflow: hidden;
 }
 
-/* Center content */
 .container {
   text-align: center;
-  z-index: 2;
+  position: relative;
 }
 
 h1 {
-  font-size: 36px;
-  color: #333;
+  margin-bottom: 40px;
 }
 
-.btn-group {
-  margin-top: 30px;
-  display: flex;
-  gap: 20px;
-  justify-content: center;
+.buttons {
   position: relative;
+  height: 80px;
 }
 
 .btn {
-  padding: 15px 30px;
-  font-size: 20px;
-  cursor: pointer;
+  padding: 14px 28px;
+  font-size: 18px;
   border: none;
-  border-radius: 10px;
-  transition: all 0.3s ease;
-  position: relative;
+  border-radius: 8px;
+  cursor: pointer;
+  position: absolute;
+  transition: transform 0.25s ease, left 0.25s ease, top 0.25s ease;
 }
 
-/* YES button */
 .yes {
-  background-color: #ff4f87;
-  color: #333;
-}
-
-/* NO button */
-.no {
-  background-color: #dc3545;
+  background: #28a745;
   color: white;
-  position: absolute;
-}
-
-/* Floating hearts */
-.hearts {
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  top: 0;
   left: 0;
-  overflow: hidden;
-  z-index: 1;
 }
 
-.heart {
-  position: absolute;
-  color: rgba(255, 255, 255, 0.7);
-  font-size: 20px;
-  animation: floatUp linear infinite;
-}
-
-@keyframes floatUp {
-  from {
-    transform: translateY(100vh);
-    opacity: 1;
-  }
-  to {
-    transform: translateY(-10vh);
-    opacity: 0;
-  }
+.no {
+  background: #dc3545;
+  color: white;
+  left: 120px;
 }
